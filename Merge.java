@@ -3,7 +3,7 @@ import java.util.*;
 public class Merge{
 
   public static void mergesort(int[] data){
-    mergesort(data,0,data.length-1);
+    mergesort(data,0,data.length);
   }
 
   public static void mergesort(int[] data, int lo, int hi){
@@ -23,22 +23,38 @@ public class Merge{
     int leftIdx = 0;
     while (idx < data.length){
       if (leftIdx >= left.length) {
-        data[idx] = right[leftIdx];
-        leftIdx++;
+        data[idx] = right[rightIdx];
+        rightIdx++;
         idx++;
-      } else if (leftIdx >= right.length) {
+      }
+      else if (rightIdx >= right.length) {
         data[idx] = left[leftIdx];
-        leftIdx++;
-        idx++;
-      } else if (left[leftIdx] <= right[leftIdx]) {
-        data[idx] = left[leftIdx];
-        leftIdx++;
-        idx++;
-      } else {
-        data[idx] = right[leftIdx];
         leftIdx++;
         idx++;
       }
+      else if (left[leftIdx] <= right[rightIdx]) {
+        data[idx] = left[leftIdx];
+        leftIdx++;
+        idx++;
+      }
+      else {
+        data[idx] = right[rightIdx];
+        rightIdx++;
+        idx++;
+      }
     }
+  }
+  public static void main(String[] args){
+    int[] arr = new int[100000];
+    int[] arr2 = new int[100000];
+    Random rand = new Random();
+    for (int i = 0; i < arr.length; i++){
+      int r = rand.nextInt();
+      arr[i] = r;
+      arr2[i] = r;
+    }
+    mergesort(arr);
+    Arrays.sort(arr2);
+    System.out.println(Arrays.toString(arr).equals(Arrays.toString(arr2)));
   }
 }
