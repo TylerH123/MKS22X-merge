@@ -19,6 +19,26 @@ public class Merge{
     int[] right = Arrays.copyOfRange(data,mid,data.length);
     mergesort(right,0,right.length-1);
     int idx = 0;
-    
+    int rightIdx = 0;
+    int leftIdx = 0;
+    while (idx < data.length){
+      if (leftIdx >= left.length) {
+        data[idx] = right[leftIdx];
+        leftIdx++;
+        idx++;
+      } else if (leftIdx >= right.length) {
+        data[idx] = left[leftIdx];
+        leftIdx++;
+        idx++;
+      } else if (left[leftIdx] <= right[leftIdx]) {
+        data[idx] = left[leftIdx];
+        leftIdx++;
+        idx++;
+      } else {
+        data[idx] = right[leftIdx];
+        leftIdx++;
+        idx++;
+      }
+    }
   }
 }
