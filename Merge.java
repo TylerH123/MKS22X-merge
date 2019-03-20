@@ -44,9 +44,6 @@ public class Merge{
       }
     }
   }
-  public static void mergesortO(int[] data){
-    mergesort2(data,0,data.length);
-  }
   public static void mergesort0(int[] data, int[] temp, int lo, int hi){
     if(lo >= hi){
       return;
@@ -55,7 +52,30 @@ public class Merge{
       insertionSort(data,lo,hi);
     }
     else{
-      
+      int mid = (hi + lo) / 2;
+      //left half
+      mergesort0(temp, data, lo, mid);
+      //right half
+      mergesort0(temp, data, mid + 1, hi);
+      int idx = lo; // index being replaced in data
+      int leftIdx = lo; // 0
+      int rightIdx = mid+1; // 1
+      while (idx <= hi) {
+        if (rightIdx > hi) {
+          data[idx] = temp[leftIdx];
+          leftIdx++;
+        } else if (leftIdx > mid) {
+          data[idx] = temp[rightIdx];
+          rightIdx++;
+        } else if (temp[leftIdx] <= temp[rightIdx]) {
+          data[idx] = temp[leftIdx];
+          leftIdx++;
+        } else {
+          data[idx] = temp[rightIdx];
+          rightIdx++;
+        }
+        idx++;
+      }
     }
   }
   private static void insertionSort(int[] data, int lo, int hi){
