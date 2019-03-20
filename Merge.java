@@ -44,7 +44,7 @@ public class Merge{
       }
     }
   }
-  public static void mergesort0(int[] data, int[] temp, int lo, int hi){
+  public static void mergesortO(int[] data, int[] temp, int lo, int hi){
     if(lo >= hi){
       return;
     }
@@ -54,9 +54,9 @@ public class Merge{
     else{
       int mid = (hi + lo) / 2;
       //left half
-      mergesort0(temp, data, lo, mid);
+      mergesortO(temp, data, lo, mid);
       //right half
-      mergesort0(temp, data, mid + 1, hi);
+      mergesortO(temp, data, mid + 1, hi);
       int idx = lo; // index being replaced in data
       int leftIdx = lo; // 0
       int rightIdx = mid+1; // 1
@@ -78,26 +78,15 @@ public class Merge{
       }
     }
   }
-  private static void insertionSort(int[] data, int lo, int hi){
-    for (int i = lo+1; i < hi; i++){
-      //copy of the current num
+  private static void insertionSort(int[] data, int lo, int hi) {
+    for (int i = lo+1; i <= hi; i++) {
       int current = data[i];
-      //loop through the sorted portion of the array to determine where to place the current num
-      for (int j = i-1; j >= 0; j--){
-        //if the current num is bigger than the num at index j is shifted down and current replaces that num at j
-        if (current > data[j]){
-          data[j+1] = current;
-          j = -1;
-        }
-        //if the current number is less than the num at index j then shift the numbers down
-        else{
-          data[j+1] = data[j];
-        }
-        //if current is smaller than all the numbers, then j = 0, which means it has to be the first element
-        if (j == 0){
-          data[0] = current;
-        }
+      int j = i-1;
+      while (j >= lo && data[j] > current) {
+        data[j+1] = data[j];
+        j--;
       }
+      data[j+1] = current;
     }
   }
   /**public static void main(String[] args){
@@ -179,7 +168,7 @@ public class Merge{
      * Test your sort here //yoursort(start);
      * Add code to switch which sort is tested by changing one of the args!
      */
-    mergesort(start);
+    mergesortO(start,start,0,start.length-1);
     long elapsedTime = System.currentTimeMillis() - startTime;
     if(Arrays.equals(start,result)){
       System.out.println("PASS Case "+name(type)+"\t array, size:"+start.length+"\t"+elapsedTime/1000.0+"sec ");
