@@ -44,45 +44,18 @@ public class Merge{
       }
     }
   }
-  public static void mergesort2(int[] data){
+  public static void mergesortO(int[] data){
     mergesort2(data,0,data.length);
   }
-  public static void mergesort2(int[] data, int lo, int hi){
-    if(data.length <= 2){
+  public static void mergesort0(int[] data, int[] temp, int lo, int hi){
+    if(lo >= hi){
+      return;
+    }
+    if ((hi-lo) < 10){
       insertionSort(data,lo,hi);
     }
-    //middle index of data
-    int mid = data.length / 2;
-    //left side of data
-    int[] left = Arrays.copyOfRange(data,0,mid);
-    mergesort(left,0,left.length-1);
-    //right side of data
-    int[] right = Arrays.copyOfRange(data,mid,data.length);
-    mergesort(right,0,right.length-1);
-    int idx = 0;
-    int rightIdx = 0;
-    int leftIdx = 0;
-    while (idx < data.length){
-      if (leftIdx >= left.length) {
-        data[idx] = right[rightIdx];
-        rightIdx++;
-        idx++;
-      }
-      else if (rightIdx >= right.length) {
-        data[idx] = left[leftIdx];
-        leftIdx++;
-        idx++;
-      }
-      else if (left[leftIdx] <= right[rightIdx]) {
-        data[idx] = left[leftIdx];
-        leftIdx++;
-        idx++;
-      }
-      else {
-        data[idx] = right[rightIdx];
-        rightIdx++;
-        idx++;
-      }
+    else{
+      
     }
   }
   private static void insertionSort(int[] data, int lo, int hi){
