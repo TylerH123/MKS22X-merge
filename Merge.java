@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Merge{
 
-  public static void mergesort(int[] data){
+  public static void mergesortSlow(int[] data){
     mergesort(data,0,data.length);
   }
 
@@ -44,11 +44,18 @@ public class Merge{
       }
     }
   }
+  public static void mergesort(int[]data){
+    int[] temp = new int[data.length];
+    for (int i = 0; i < data.length; i++){
+      temp[i] = data[i];
+    }
+    mergesortO(data,temp,0,data.length-1);
+  }
   public static void mergesortO(int[] data, int[] temp, int lo, int hi){
     if(lo >= hi){
       return;
     }
-    if ((hi-lo) < 10){
+    if ((hi-lo+1) < 10){
       insertionSort(data,lo,hi);
     }
     else{
@@ -168,7 +175,7 @@ public class Merge{
      * Test your sort here //yoursort(start);
      * Add code to switch which sort is tested by changing one of the args!
      */
-    mergesortO(start,start,0,start.length-1);
+    mergesort(start);
     long elapsedTime = System.currentTimeMillis() - startTime;
     if(Arrays.equals(start,result)){
       System.out.println("PASS Case "+name(type)+"\t array, size:"+start.length+"\t"+elapsedTime/1000.0+"sec ");
